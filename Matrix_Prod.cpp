@@ -4,7 +4,15 @@
 using namespace std;
 using namespace std::chrono;
 
-#define SIZE 1000
+#define SIZE 2048
+
+/* Tests:
+    128: 12 ms
+    256: 55 ms
+    512: 535 ms
+    1024: 4642 ms
+    2048: 108816 ms
+*/
 
 void generate(int* mat) {
     for (int i = 0; i < SIZE * SIZE; i++) {
