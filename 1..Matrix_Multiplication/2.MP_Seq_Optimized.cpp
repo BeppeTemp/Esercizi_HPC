@@ -4,15 +4,15 @@
 using namespace std;
 using namespace std::chrono;
 
-#define SIZE 2048
+#define SIZE 128
 
 /* ------------------------- */
 // Results:
 /* ------------------------- */
-// Size 256:    50 ms
-// Size 512:    535 ms
-// Size 1024:   4421 ms
-// Size 2048:   130605 ms
+// Size 256:    2.09 ms
+// Size 512:    66.33 ms
+// Size 1024:   520.38 ms
+// Size 2048:   4238.24 ms
 /* ------------------------- */
 
 void time_stats(float micro_seconds) {
@@ -20,7 +20,9 @@ void time_stats(float micro_seconds) {
     printf("    * %.0f μs \n", micro_seconds);
     printf("    * %.2f ms \n", micro_seconds / 1000);
     printf("    * %.2f s \n", micro_seconds / 1000 / 1000);
-    printf("    * %.0f minutes and %d seconds\n", ((micro_seconds / 1000) / 1000) / 60,  (int) ((micro_seconds / 1000) / 1000) % 60);
+    printf("    * %.0f minutes and %d seconds\n",
+           ((micro_seconds / 1000) / 1000) / 60,
+           (int)((micro_seconds / 1000) / 1000) % 60);
 }
 
 void generate(int* mat) {
@@ -64,11 +66,10 @@ int main() {
     auto start = high_resolution_clock::now();
 
     for (int i = 0; i < SIZE; ++i)
-        for (int j = 0; j < SIZE; ++j)
-            for (int k = 0; k < SIZE; ++k) {
+        for (int k = 0; k < SIZE; ++k)
+            for (int j = 0; j < SIZE; ++j)
                 mat_result[i * SIZE + j] +=
                     mat_one[i * SIZE + k] * mat_two[k * SIZE + j];
-            }
 
     auto stop = high_resolution_clock::now();
 

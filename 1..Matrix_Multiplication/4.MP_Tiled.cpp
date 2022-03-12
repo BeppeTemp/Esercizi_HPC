@@ -1,18 +1,20 @@
+#include <omp.h>
 #include <chrono>
 #include <iostream>
 
 using namespace std;
 using namespace std::chrono;
 
-#define SIZE 2048
+#define SIZE 2046
+#define TILE 32
 
 /* ------------------------- */
 // Results:
 /* ------------------------- */
-// Size 256:    50 ms
-// Size 512:    535 ms
-// Size 1024:   4421 ms
-// Size 2048:   130605 ms
+// Size 256:    2.50 ms
+// Size 512:    16.24 ms
+// Size 1024:   74.86 ms
+// Size 2048:   562.42 ms
 /* ------------------------- */
 
 void time_stats(float micro_seconds) {
@@ -20,7 +22,9 @@ void time_stats(float micro_seconds) {
     printf("    * %.0f μs \n", micro_seconds);
     printf("    * %.2f ms \n", micro_seconds / 1000);
     printf("    * %.2f s \n", micro_seconds / 1000 / 1000);
-    printf("    * %.0f minutes and %d seconds\n", ((micro_seconds / 1000) / 1000) / 60,  (int) ((micro_seconds / 1000) / 1000) % 60);
+    printf("    * %.0f minutes and %d seconds\n",
+           ((micro_seconds / 1000) / 1000) / 60,
+           (int)((micro_seconds / 1000) / 1000) % 60);
 }
 
 void generate(int* mat) {
@@ -63,12 +67,16 @@ int main() {
 
     auto start = high_resolution_clock::now();
 
-    for (int i = 0; i < SIZE; ++i)
-        for (int j = 0; j < SIZE; ++j)
-            for (int k = 0; k < SIZE; ++k) {
-                mat_result[i * SIZE + j] +=
-                    mat_one[i * SIZE + k] * mat_two[k * SIZE + j];
-            }
+    #pragma omp parallel for
+    for (int ih = 0; ih < SIZE; ih += TILE)
+        #pragma omp parallel for
+        for (int jh = 0; jh < SIZE; jh += TILE)
+            for (int kh = 0; kh < SIZE; kh += TILE)
+                for (int il = 0; il < TILE; il++)
+                    for (int kl = 0; kl < TILE; kl++)
+                        for (int jl = 0; jl < TILE; jl++)
+                            mat_result[(ih + il) * TILE + (jh + jl)] +=
+                                mat_one[(ih + il) * TILE + (kh + kl)] * mat_two[(kh + kl) * TILE + (jh + jl)];
 
     auto stop = high_resolution_clock::now();
 

@@ -20,8 +20,23 @@
       },
       {
         "type": "shell",
+        "label": "C Compile and Run (Optimized)",
+        "command": "g++ -O2 -g ${fileDirname}/${fileBasename} -o ${fileBasenameNoExtension}.out && ./${fileBasenameNoExtension}.out && rm ${fileBasenameNoExtension}.out",
+        "presentation": {
+          "reveal": "always"
+        },
+        "problemMatcher": [
+          "$eslint-compact"
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": false
+        }
+      },
+      {
+        "type": "shell",
         "label": "C Compile and Run (OpenMP)",
-        "command": "g++ -g ${fileDirname}/${fileBasename} -o ${fileBasenameNoExtension}.out -fopenmp && ${fileBasenameNoExtension}.out && rm ${fileBasenameNoExtension}.out",
+        "command": "g++ -O2 -g ${fileDirname}/${fileBasename} -o ${fileBasenameNoExtension}.out -fopenmp && ./${fileBasenameNoExtension}.out && rm ${fileBasenameNoExtension}.out",
         "presentation": {
           "reveal": "always"
         },
