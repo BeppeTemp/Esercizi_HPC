@@ -5,8 +5,8 @@
     "tasks": [
       {
         "type": "shell",
-        "label": "C Compile and Run (Only Mac)",
-        "command": "g++ -g ${fileDirname}/${fileBasename} -o Compiled/${fileBasenameNoExtension}.out && Compiled/${fileBasenameNoExtension}.out",
+        "label": "C Compile and Run (Standard)",
+        "command": "g++ -g ${fileDirname}/${fileBasename} -o ${fileBasenameNoExtension}.out && ./${fileBasenameNoExtension}.out && rm ${fileBasenameNoExtension}.out",
         "presentation": {
           "reveal": "always"
         },
@@ -15,9 +15,25 @@
         ],
         "group": {
           "kind": "build",
-          "isDefault": true
+          "isDefault": false
         }
-      }
+      },
+      {
+        "type": "shell",
+        "label": "C Compile and Run (OpenMP)",
+        "command": "g++ -g ${fileDirname}/${fileBasename} -o ${fileBasenameNoExtension}.out -fopenmp && ${fileBasenameNoExtension}.out && rm ${fileBasenameNoExtension}.out",
+        "presentation": {
+          "reveal": "always"
+        },
+        "problemMatcher": [
+          "$eslint-compact"
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": false
+        }
+      },
+
     ]
   }
   

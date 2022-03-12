@@ -4,21 +4,30 @@
 using namespace std;
 using namespace std::chrono;
 
-#define SIZE 2048
+#define SIZE 512 
 
-/* Tests:
-    128: 12 ms
-    256: 55 ms
-    512: 535 ms
-    1024: 4642 ms
-    2048: 108816 ms
-*/
+/* ------------------------- */
+// Results:
+/* ------------------------- */
+// Size 256:    50 ms
+// Size 512:    535 ms
+// Size 1024:   4421 ms
+// Size 2048:   130605 ms
+/* ------------------------- */
+
+void time_stats(double micro_seconds) {
+    cout << "Execution times:" << endl;
+    cout << "   * " << micro_seconds << " μs" << endl;
+    cout << "   * " << micro_seconds / 1000 << " ms" << endl;
+    cout << "   * " << (micro_seconds / 1000) / 1000 << " s" << endl;
+}
 
 void generate(int* mat) {
     for (int i = 0; i < SIZE * SIZE; i++) {
         mat[i] = rand() % 10;
     }
 }
+
 void printMat(int* mat) {
     printf("\n");
     for (int i = 0; i < (SIZE * SIZE); i++) {
@@ -67,8 +76,7 @@ int main() {
         printMat(mat_result);
     }
 
-    auto duration = duration_cast<microseconds>(stop - start);
-    cout << "Execution time: "<< duration.count() / 1000 << " ms" << endl;
+    time_stats(duration_cast<microseconds>(stop - start).count());
 
     return 0;
 }
