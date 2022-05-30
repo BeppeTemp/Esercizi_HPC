@@ -2,5 +2,12 @@
     "files.associations": {
         "chrono": "cpp",
         "iostream": "cpp"
-    }
+    },
+    "cSpell.words": [
+        "CUDA",
+        "nsyght",
+        "nsys",
+        "nvtop",
+        "wtime"
+    ]
 }

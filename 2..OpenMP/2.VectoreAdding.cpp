@@ -1,7 +1,17 @@
 #include <omp.h>
 #include <iostream>
+#include <chrono>
 
 using namespace std;
+using namespace std::chrono;
+
+void time_stats(double seconds) {
+    printf("Execution times:\n");
+    printf("    * %.0f μs \n", seconds * 1000 * 1000);
+    printf("    * %.2f ms \n", seconds * 1000);
+    printf("    * %.2f s \n", seconds );
+    printf("\n");
+}
 
 int main(int argc, char* argv[]) {
     const int size = 512;
@@ -31,11 +41,7 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    // print results
-    for (int i = 0; i < size; i++) {
-        cout << C[i] << " ";
-    }
-    
-    cout << "Time:" << omp_get_wtime() - t_init << endl;
+
+    time_stats(omp_get_wtime()-t_init);
     return 0;
 }

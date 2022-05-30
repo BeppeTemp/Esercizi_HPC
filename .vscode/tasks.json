@@ -36,7 +36,7 @@
     {
       "type": "shell",
       "label": "C++ Compile and Run (Optimized)",
-      "command": "g++ -O2 -g ${fileDirname}/${fileBasename} -o ${fileBasenameNoExtension}.out && ./${fileBasenameNoExtension}.out && rm ${fileBasenameNoExtension}.out",
+      "command": "g++ -O3 -g ${fileDirname}/${fileBasename} -o ${fileBasenameNoExtension}.out && ./${fileBasenameNoExtension}.out && rm ${fileBasenameNoExtension}.out",
       "presentation": {
         "reveal": "always"
       },
@@ -75,7 +75,7 @@
       ],
       "group": {
         "kind": "build",
-        "isDefault": false
+        "isDefault": true
       }
     },
     {
@@ -90,7 +90,7 @@
       ],
       "group": {
         "kind": "build",
-        "isDefault": false
+        "isDefault": true
       }
     },
     {
@@ -105,7 +105,7 @@
       ],
       "group": {
         "kind": "build",
-        "isDefault": false
+        "isDefault": true
       }
     }
   ]
