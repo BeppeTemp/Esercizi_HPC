@@ -3,13 +3,11 @@
 #include <stdlib.h>
 
 int main(int argo, char* argv[]) {
-
-    // Questa variabile è shared
     int x = 5;
 
     #pragma omp parallel private(x)
     {
-    // La variabile diventa private e viene settata a 0
+    //! La variabile diventa private e viene settata a 0
 
     if (omp_get_thread_num() == 0) {
         x++;

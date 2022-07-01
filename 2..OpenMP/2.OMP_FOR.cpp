@@ -22,7 +22,8 @@ int main(int argo, char* argv[]) {
 
     double t_init = omp_get_wtime();
 
-    // Ogni thread ha size/12 elementi da computare
+    //! Ogni thread ha size/12 elementi da computare
+    //! I dati restano dove devono, ottimo per NUMA, ma non è buono per il LB
     #pragma omp parallel for schedule(static, SIZE / omp_get_max_threads())
     for (int i = 0; i < SIZE; i++) {
         a[i] = 0;
@@ -40,7 +41,8 @@ int main(int argo, char* argv[]) {
 
     t_init = omp_get_wtime();
 
-    // Ogni thread ha un tot elementi da computare e appena finisce ne riceve altri
+    //! Ogni thread ha un tot di elementi da computare e appena finisce ne riceve altri
+    //! Impossibile tenere traccia di dove vanno i dati, da non usare in NUMA, buono per LB con i giusti chunk
     #pragma omp parallel for schedule(dynamic, DYNAMIC_GUIDED_CHUNK)
     for (int i = 0; i < SIZE; i++) {
         a[i] = 0;
@@ -58,7 +60,8 @@ int main(int argo, char* argv[]) {
 
     t_init = omp_get_wtime();
 
-    // Ogni thread ha un tot elementi da computare e appena finisce ne riceve altri ma la quantità che ne riceve si riduce
+    //! Ogni thread ha un tot di elementi da computare e appena finisce ne riceve altri ma la quantità che ne riceve si riduce
+    //! Impossibile tenere traccia di dove vanno i dati, da non usare in NUMA, buono per LB con i giusti chunk
     #pragma omp parallel for schedule(guided, DYNAMIC_GUIDED_CHUNK)
     for (int i = 0; i < SIZE; i++) {
         a[i] = 0;

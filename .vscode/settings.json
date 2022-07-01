@@ -1,13 +1,17 @@
 {
     "files.associations": {
         "chrono": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "random": "cpp",
+        "atomic": "cpp"
     },
     "cSpell.words": [
         "CUDA",
         "firstprivate",
+        "lastprivate",
         "nsyght",
         "nsys",
+        "NUMA",
         "nvtop",
         "taskwait",
         "threadprivate",

@@ -46,6 +46,7 @@ int main(int argo, char* argv[]) {
 
     t_init = omp_get_wtime();
 
+    //! Collassa ma non c'è questo grande miglioramento
     #pragma omp parallel for collapse(3)
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE; j++)

@@ -24,7 +24,9 @@ int main(int argo, char* argv[]) {
     // In pratica ritorna sequenziale
     #pragma omp parallel for
     for (int i = 0; i < SIZE; i++) {
-    #pragma omp critical
+        //! Si possono assegnare dei nomi alle regioni parallele
+        //! per fare sincronizzazione a grana fine
+        #pragma omp critical(test)
         {
             a[i] = 0;
             b[i] = i;
@@ -36,7 +38,7 @@ int main(int argo, char* argv[]) {
 
     t_init = omp_get_wtime();
 
-    // Parallelo
+    // Implementazione parallela
     #pragma omp parallel for
     for (int i = 0; i < SIZE; i++) {
         a[i] = 0;

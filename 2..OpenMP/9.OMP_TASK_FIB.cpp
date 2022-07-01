@@ -24,16 +24,18 @@ int fib_par(int n) {
     if (n < 2)
         return n;
 
-    // sta fuori dal task quindi quando entra è firstprivate
+    //! Queste sembrano shared, ma sono in una funzione chiamata in una PR
+    //! Sta fuori dal task quindi quando entra è firstprivate
     int x, y;
 
+    //! L'if serve a controllare se c'è abbastanza lavoro da giustificare l'overhead di creazione
     #pragma omp task shared(x) if (n > 30)
     { x = fib_par(n - 1); }
 
     #pragma omp task shared(y) if (n > 30)
     { y = fib_par(n - 2); }
 
-    // Serve aspettare che finiscano entrambi prima di ritornare valore
+    //! Serve aspettare che finiscano entrambi i task creati prima di ritornare valore
     #pragma omp taskwait
 
     return x + y;

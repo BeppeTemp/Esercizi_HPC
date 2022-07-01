@@ -42,6 +42,7 @@ int main(int argo, char* argv[]) {
 
     t_init = omp_get_wtime();
 
+    //! la clausola nowait rimuove le barriere implicite funziona con for, sections e single
     #pragma omp parallel
     {
         #pragma omp for nowait
@@ -56,6 +57,7 @@ int main(int argo, char* argv[]) {
             a[i] = b[i] + c[i];
         }
     }
+    //! Dopo le PR ci sono delle barriere implicite
 
     printf("With nowait but without barrier at the end: \n");
     time_stats(omp_get_wtime() - t_init);
@@ -76,6 +78,7 @@ int main(int argo, char* argv[]) {
             a[i] = b[i] + c[i];
         }
 
+        //! In teoria inutile perché presente alla fine della parallel region
         #pragma omp barrier
     }
 

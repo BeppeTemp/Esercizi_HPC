@@ -15,7 +15,11 @@ void time_stats(double seconds) {
 }
 
 int main(int argo, char* argv[]) {
+    //! Lo metti la e non si muove più
     setenv("OMP_PLACES", "cores", 1);
+    //! Thread ovvero in corrispondenza del thread hardware
+    //! Cores ovvero in corrispondenza del core
+    //! Socket ovvero in corrispondenza del singolo core fisico (se MT)
 
     double t_init = omp_get_wtime();
 
