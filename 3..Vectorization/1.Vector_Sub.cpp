@@ -7,7 +7,7 @@ int main() {
     __m256 odds = _mm256_set_ps(1.0, 3.0, 5.0, 7.0, 9.0, 11.0, 13.0, 15.0);
 
     /* Compute the difference between the two vectors */
-    __m256 result = _mm256_sub_ps(evens, odds);
+    __m256 result = _mm256_add_ps(evens, odds);
 
     /* Display the elements of the result vector */
     float* f = (float*)&result;

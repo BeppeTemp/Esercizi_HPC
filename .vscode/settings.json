@@ -5,9 +5,12 @@
     },
     "cSpell.words": [
         "CUDA",
+        "firstprivate",
         "nsyght",
         "nsys",
         "nvtop",
+        "taskwait",
+        "threadprivate",
         "wtime"
     ]
 }
