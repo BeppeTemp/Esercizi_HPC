@@ -11,15 +11,19 @@
         "lastprivate",
         "loadu",
         "maskload",
+        "mulhi",
         "mullo",
         "nsyght",
         "nsys",
         "NUMA",
         "nvtop",
+        "randomici",
         "setr",
         "setzero",
         "taskwait",
         "threadprivate",
+        "vettorizzare",
+        "vettorizzazione",
         "wtime"
     ]
 }

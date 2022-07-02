@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//! Meglio per accessi randomici, difficile da vettorizzare e farne gather e scatter
 struct AOS_Element {
     int x;
     int y;
@@ -9,12 +10,13 @@ struct AOS_Element {
 };
 struct AOS_Element el_aos[1024];
 
-struct SOA_Element {
+//! Migliore per quanto riguarda la vettorizzazione ed accessi sequenziali
+struct SOA_CN {
     int x[1024];
     int y[1024];
     int z[1024];
 };
-struct SOA_Element el_soa;
+struct SOA_CN el_soa;
 
 void time_stats(double seconds) {
     printf("Execution times:\n");

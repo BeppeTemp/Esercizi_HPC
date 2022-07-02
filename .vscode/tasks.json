@@ -66,7 +66,7 @@
     {
       "type": "shell",
       "label": "C++ Compile and Run (Vectorization)",
-      "command": "g++ -mavx -g ${fileDirname}/${fileBasename} -o ${fileBasenameNoExtension}.out && ./${fileBasenameNoExtension}.out && rm ${fileBasenameNoExtension}.out",
+      "command": "g++ -mavx -mfma -mavx2 -g ${fileDirname}/${fileBasename} -o ${fileBasenameNoExtension}.out && ./${fileBasenameNoExtension}.out && rm ${fileBasenameNoExtension}.out",
       "presentation": {
         "reveal": "always"
       },

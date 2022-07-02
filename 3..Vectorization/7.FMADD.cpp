@@ -7,7 +7,7 @@ int main() {
     float* vet_c = (float*)aligned_alloc(sizeof(float) * 8, 32);
 
     for (int i = 0; i < 8; i++) {
-        vet_a[i] = 0;
+        vet_a[i] = 1;
         vet_b[i] = 2;
         vet_c[i] = 1;
     }

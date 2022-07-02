@@ -6,7 +6,7 @@
 using namespace std;
 using namespace std::chrono;
 
-#define SIZE 8
+#define SIZE 16
 
 void time_stats(float micro_seconds) {
     cout << "Execution times:" << endl;
@@ -26,23 +26,20 @@ int main() {
         b_vet[i] = 1;
     }
 
-    float* res_temp = (float*)malloc(8 * sizeof(float));
     float* res_vet = (float*)malloc(SIZE * sizeof(float));
 
     auto start = high_resolution_clock::now();
 
     for (int i = 0; i < SIZE / 8; i++) {
-        __m256 a_ps = _mm256_load_ps(a_vet + sizeof(float) * i);
-        __m256 b_ps = _mm256_load_ps(b_vet + sizeof(float) * i);
+        __m256 a_ps = _mm256_load_ps(a_vet + (32) * i);
+        __m256 b_ps = _mm256_load_ps(b_vet + (32) * i);
 
         __m256 res_ps = _mm256_add_ps(a_ps, b_ps);
 
-        res_temp = (float*)&res_ps;
-
         for (int j = 0; j < 8; j++) {
-            // printf("%d ", i * 8 + j);
-            // printf("%d ", j);
-            res_vet[(i * 8) + j] = res_temp[j];
+            printf("rs: %d ", i * 8 + j);
+            printf("rt: %d ", j);
+            res_vet[(i * 8) + j] = res_ps[j];
         }
     }
     printf("\n");
