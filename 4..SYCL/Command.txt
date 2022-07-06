@@ -1,0 +1,1 @@
+export HIPSYCL_TARGETS=cuda:sm_75 && syclcc /root/Esercizi_HPC/4..SYCL/SYCL_code.cpp && ./a.out && rm a.out
