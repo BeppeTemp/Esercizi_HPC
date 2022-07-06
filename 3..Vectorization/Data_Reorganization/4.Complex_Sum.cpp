@@ -47,9 +47,9 @@ int main(int argo, char* argv[]) {
     
     double t_init = omp_get_wtime();
 
-    for (int i = 0; i < SIZE; i++) {
-        el_aos_c[i].real = el_aos_a[i].real * el_aos_b[i].real - el_aos_a[i].imag * el_aos_b[i].imag;
-        el_aos_c[i].imag = el_aos_a[i].real * el_aos_b[i].imag + el_aos_a[i].imag * el_aos_b[i].real;
+    for (int i = 0; i < SIZE - 1; i++) {
+        el_aos_c[i].real = el_aos_a[i].real * el_aos_b[i + 1].real - el_aos_a[i].imag * el_aos_b[i].imag;
+        el_aos_c[i].imag = el_aos_a[i].real * el_aos_b[i + 1].imag + el_aos_a[i].imag * el_aos_b[i].real;
     }
 
     printf("AOS: \n");
@@ -57,13 +57,15 @@ int main(int argo, char* argv[]) {
 
     t_init = omp_get_wtime();
 
-    for (int i = 0; i < SIZE; i++) {
-        el_soa_c.real[i] = el_soa_a.real[i] * el_soa_b.real[i] - el_soa_a.imag[i] * el_soa_b.imag[i];
-        el_soa_c.imag[i] = el_soa_a.real[i] * el_soa_b.imag[i] + el_soa_a.imag[i] * el_soa_b.real[i];
+    for (int i = 0; i < SIZE - 1; i++) {
+        el_soa_c.real[i] = el_soa_a.real[i] * el_soa_b.real[i + 1] - el_soa_a.imag[i] * el_soa_b.imag[i];
+        el_soa_c.imag[i] = el_soa_a.real[i] * el_soa_b.imag[i + 1] + el_soa_a.imag[i] * el_soa_b.real[i];
     }
 
     printf("SOA: \n");
     time_stats(omp_get_wtime() - t_init);
+
+    //! Questi sono accessi più specifici o comunque non allineati quindi è meglio AoS
 
     return 0;
 }

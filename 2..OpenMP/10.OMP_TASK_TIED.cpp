@@ -32,7 +32,7 @@ int main(int argo, char* argv[]) {
 
     t_init = omp_get_wtime();
 
-    // Esisto solo la clausola untied, tied è quello di default
+    //! Esiste solo la clausola untied, tied è quello di default
     #pragma omp task untied
     for (int i = 0; i < SIZE; i++) {
         printf("%d ", omp_get_thread_num());

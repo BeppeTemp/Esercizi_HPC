@@ -8,7 +8,6 @@ struct AOS_Element {
     int y;
     int z;
 };
-struct AOS_Element el_aos[1024];
 
 //! Migliore per quanto riguarda la vettorizzazione ed accessi sequenziali
 struct SOA_CN {
@@ -16,7 +15,6 @@ struct SOA_CN {
     int y[1024];
     int z[1024];
 };
-struct SOA_CN el_soa;
 
 void time_stats(double seconds) {
     printf("Execution times:\n");
@@ -27,6 +25,9 @@ void time_stats(double seconds) {
 }
 
 int main(int argo, char* argv[]) {
+    AOS_Element el_aos[1024];
+    SOA_CN el_soa;
+
     double t_init = omp_get_wtime();
 
     for (int i = 0; i < 1024; i++) {
